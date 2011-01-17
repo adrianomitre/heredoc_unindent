@@ -7,10 +7,6 @@
 Removes leading whitespace from Ruby heredocs. In fact, it removes leading
 whitespace from each line of a string, but only as much as the first line.
 
-== FEATURES/PROBLEMS:
-
-* FIX (list of features or problems)
-
 == SYNOPSIS:
 
   if true
