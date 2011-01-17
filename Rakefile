@@ -19,6 +19,9 @@ Hoe.spec 'heredoc_unindent' do
   # (delete this comment too, of course)
 
   developer('Adriano Mitre', 'adriano.mitre@gmail.com')
+  
+  self.readme_file = 'README.rdoc'
+  self.extra_rdoc_files << 'README.rdoc'
 
   # self.rubyforge_name = 'heredoc_unindentx' # if different than 'heredoc_unindent'
 end
