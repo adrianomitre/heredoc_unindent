@@ -1,0 +1,8 @@
+.autotest
+History.txt
+Manifest.txt
+README.txt
+Rakefile
+bin/heredoc_unindent
+lib/heredoc_unindent.rb
+test/test_heredoc_unindent.rb
