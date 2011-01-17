@@ -5,42 +5,34 @@ module HeredocUnindent
 
   VERSION = '1.0.0'
  
-  # Removes leading whitespace from Ruby heredocs. In fact, it removes leading
-  # whitespace from each line of a string, but only as much as the first line.
-  # 
-  # === USAGE:
-  # 
-  #   if true
-  #     puts <<-EOS.unindent
-  #       How wonderful it is
-  #         to be able
-  #       to unindent heredocs
-  #     EOS
-  #   end
-  # 
-  # produces
-  # 
-  #   How wonderful it is
-  #     to be able
-  #   to unindent heredocs
-  # 
-  # instead of
-  # 
-  #         How wonderful it is
-  #           to be able
-  #         to unindent heredocs 
+  # Removes leading whitespace from Ruby heredocs, i.e., it removes leading
+  # whitespace from each line of a string, but only as much as the line with
+  # the smallest margin.
   #
-  def heredoc_unindent
-    first_margin = self[/^\s*/].size
+  # Unless the optional argument +warn_first_dif_min+ is set to false or nil, a
+  # warning is produced when the margin of the first line differs from the minimum.
+  #
+  def heredoc_unindent(warn_first_dif_min=true)
     min_margin = self.scan(/^\s*/).map(&:size).min
-    if first_margin != min_margin
-      puts "warning: first margin != minimum margin, maybe unident"
+    if warn_first_dif_min
+      first_margin = self[/^\s*/].size
+      if first_margin != min_margin
+        puts "warning: margin of the first line differs from minimum margin"
+      end
     end
-    margin = first_margin
-    re = Regexp.new('^\s{0,' + margin.to_s + '}'  ) # omitting the lower limit produces warnings and wrong behavior in ruby-1.8.7-p330 and ree-1.8.7-2010.02
+    re = Regexp.new('^\s{0,' + min_margin.to_s + '}'  ) # omitting the lower limit produces warnings and wrong behavior in ruby-1.8.7-p330 and ree-1.8.7-2010.02
     self.gsub(re, '')
   end
   alias unindent heredoc_unindent
+
+  # Performs HeredocUnindent#heredoc_unindent in place, returning self, or nil if no changes were made
+  #
+  def  heredoc_unindent!(warn_first_dif_min=true)
+    orig = self.dup
+    self.replace(self.heredoc_unindent(warn_first_dif_min))
+    self != orig ? self : nil
+  end
+  alias unindent! heredoc_unindent!
   
 end
 

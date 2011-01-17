@@ -1,35 +1,86 @@
+require "rubygems"
 require "test/unit"
-require File.join(File.dirname(File.expand_path(__FILE__)), "../lib/heredoc_unindent")
+require File.expand_path("../../lib/heredoc_unindent", __FILE__)
 
 class TestHeredocUnindent < Test::Unit::TestCase
 
-  def test_unindent_single_heredocs
-    foo = <<-EOS
+  def prep_sing1
+    ugly = <<-EOS
+      that
+    is
+      weird
+    EOS
+    
+    pretty  = <<EOS
+  that
+is
+  weird
+EOS
+    return ugly, pretty
+  end
+  
+  def prep_sing2
+    ugly = <<-EOS
       for k in 1 .. 10
         puts k
       end
     EOS
     
-    bar = <<EOS
+    pretty  = <<EOS
 for k in 1 .. 10
   puts k
 end
 EOS
-    assert_equal bar, foo.unindent    
+    return ugly, pretty
   end
+    
+  def prep_sing3
+    ugly = <<-EOS
+      The first line
   
-  def test_unindent_multiple_heredocs
-    foo = <<-BEGIN + "<--- middle --->\n" + <<-END
+      The third line    
+    EOS
+    
+    pretty  = <<EOS
+The first line
+
+The third line    
+EOS
+    return ugly, pretty
+  end
+
+  def prep_mult
+    ugly = <<-BEGIN + "      <--- middle --->\n" + <<-END
       This is the beginning:
       BEGIN
         And now it is over!
     END
-    bar = <<-EOS
+    pretty = <<EOS
 This is the beginning:
 <--- middle --->
   And now it is over!
-    EOS
-    assert_equal bar, foo.unindent    
+EOS
+    return ugly, pretty
+  end
+  
+  def test_unindent
+    perform_tests(*prep_sing1)
+    perform_tests(*prep_sing2)
+    perform_tests(*prep_mult)
+  end
+
+  def perform_tests(ugly, pretty)
+    ugly_bak = ugly.dup
+    assert_equal pretty, ugly.unindent(false)
+    assert_equal pretty, ugly.heredoc_unindent(false)
+    assert_equal ugly_bak, ugly, '#unindent should have no side-effects'
+    assert_equal pretty, ugly.heredoc_unindent!(false)
+    assert_equal pretty, ugly
+    assert_equal nil, ugly.heredoc_unindent!(false)
+    ugly = ugly_bak.dup
+    assert_equal pretty, ugly.unindent!(false)
+    assert_equal pretty, ugly
+    assert_equal nil, ugly.unindent!(false)
   end
   
 end
