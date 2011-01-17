@@ -2,5 +2,6 @@ History.txt
 Manifest.txt
 README.rdoc
 Rakefile
+Wishlist.txt
 lib/heredoc_unindent.rb
 test/test_heredoc_unindent.rb
