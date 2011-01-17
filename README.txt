@@ -57,7 +57,7 @@ given by Rene Saarsoo on Dec 16 '10 at 21:41 in Stack Overflow.
 
 (The MIT License)
 
-Copyright (c) 2011 FIX
+Copyright (c) 2011 Adriano Mitre
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
