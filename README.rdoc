@@ -60,6 +60,10 @@ following gems implement the same unindenting functionality and are essentially 
 * {outdent}[http://rubygems.org/gems/outdent] (formerly {unindentable}[http://rubygems.org/gems/unindentable])
 * {unindent}[http://rubygems.org/gems/unindent]
 
+And the following gem, which has a much broader scope, also features a method
+with equivalent functionality:
+* {indentation}[http://rubygems.org/gems/indentation] -- String#reset_indentation method
+
 == LICENSE:
 
 (The MIT License)
