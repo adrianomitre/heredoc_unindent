@@ -56,7 +56,7 @@ Based on the answer by Rene Saarsoo to the question
 == ALTERNATIVES
 
 Despite minor API differences, extra-features availability or edge-case behaviour, the
-following gems implement the same unindenting functionality and are essentially equivalent:
+following gems implement the same unindenting functionality and are essentially equivalent to heredoc_unindent:
 * {outdent}[http://rubygems.org/gems/outdent] (formerly {unindentable}[http://rubygems.org/gems/unindentable])
 * {unindent}[http://rubygems.org/gems/unindent]
 
