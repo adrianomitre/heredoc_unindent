@@ -5,9 +5,9 @@ module HeredocUnindent
 
   VERSION = '1.0.0'
  
-  # Removes leading whitespace from Ruby heredocs, i.e., it removes leading
-  # whitespace from each line of a string, but only as much as the line with
-  # the smallest margin.
+  # Removes common margin from indented strings such as the ones produced by
+  # heredocs, i.e., strips out leading whitespace chars at the beggining of
+  # each line (but only as much as the line with the smallest margin).
   #
   # Unless the optional argument +warn_first_dif_min+ is set to false or nil, a
   # warning is produced when the margin of the first line differs from the minimum.
