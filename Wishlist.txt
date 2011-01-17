@@ -1,0 +1,12 @@
+== SUGGESTIONS
+
+* Benchmark heredoc_unindent against alternatives:
+  * outdent
+  * unindent
+  * the code posted by Rene Saarsoo in his answer in StackOverflow.
+  and then
+  * if there are significant performance differences, contact the other authors
+    and suggest unifying gems, keeping the fastest implementation
+  * mention the results in README (table?)
+
+  
