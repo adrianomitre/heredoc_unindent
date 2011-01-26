@@ -3,5 +3,6 @@ pkg/*
 doc/*
 website/doc/*
 website/index.html
+.yardoc/
 *.rbc
 
