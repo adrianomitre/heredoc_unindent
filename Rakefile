@@ -20,3 +20,7 @@ end
 task :tests => [:test] do
   # aliasing :test with :tests for RVM ('rvm tests')
 end
+
+task :clean_all => [:clean] do
+  rm_rf '.yardoc/'
+end
