@@ -1,10 +1,17 @@
-=== 1.0.1 / 2011-?? FIX
+=== 1.0.1 / 2011-01-26
 
-* 1 minor enhancement
+* 7 minor enhancements
 
+  * One test added for 100% code coverage
   * Changed extension of History and Wishlist from _txt_ to _rdoc_ so
     that GitHub parses them accordingly
   * Added History and Wishlist to the RDoc documentation (extra_rdoc_files)
+  * Minor additions/editions to README
+  * Refactored HeredocUnindent module into CoreExt::String::HeredocUnindent
+  * Moved version information from VERSION constant in HeredocUnindent module
+    to <tt>self.version = 'x.x.x'</tt> in Rakefile
+  * Removed irrelevant Rakefile comments
+  
 
 === 1.0.0 / 2011-01-16
 
