@@ -1,3 +1,10 @@
+=== 1.0.2 / 2011-01-26
+
+* 2 minor enhancements
+
+  * Changed example in README and other minor editions
+  * Added new rake task: clean_all
+
 === 1.0.1 / 2011-01-26
 
 * 7 minor enhancements
