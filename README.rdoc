@@ -8,35 +8,31 @@ Removes common margin from indented strings such as the ones produced by
 heredocs, i.e., strips out leading whitespace chars at the beggining of
 each line (but only as much as the line with the smallest margin).
 
-It is acknowledged that many strings defined in heredocs contain nothing but
-code to be read exclusively by parsers (e.g., Kernel#eval or web browser's),
-which are basically insensitive to extra indentation. Nevertheless, in cases
-when the string is printed or displayed, the unintended indentation is rarely
-innocuous -- and thus the reason for this gem.
+It is acknowledged that many strings defined by heredocs contain nothing but
+code to be read exclusively by parsers (e.g., Kernel#eval), which are often
+insensitive to extra indentation. Nevertheless, in the cases the string is
+printed or displayed, the unintended indentation is rarely innocuous -- and
+thus the reason for this gem.
 
 == SYNOPSIS:
 
   if true
-    puts <<-EOS.unindent
-      "How wonderful it is
+    s1 = <<-EOS
+      How sad it is
+        to be unable
+      to unindent heredocs
+    EOS
+    s2 = <<-EOS.unindent
+      How wonderful it is
         to be able
-      to unindent heredocs"
+      to do it!
     EOS
   end
 
-produces
+  s1[0, 13]  #=>  "      How sad"
+  s2[0, 13]  #=>  "How wonderful"
 
-  "How wonderful it is
-    to be able
-  to unindent heredocs"
-
-instead of
-
-        "How wonderful it is
-          to be able
-        to unindent heredocs"
-
-which would result without #unindent.
+  " foo\n  bar\n baz".unindent  #=>  "foo\n bar\nbaz"
 
 == REQUIREMENTS:
 
