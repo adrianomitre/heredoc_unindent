@@ -83,4 +83,16 @@ EOS
     assert_equal nil, ugly.unindent!(false)
   end
   
+  def test_warning
+    ugly, pretty = prep_sing1
+    filename = "/tmp/#{rand(2**64)}"
+    File.open(filename, "w") do |f|
+      $stdout = f
+      ugly.unindent(true)
+      $stdout = STDOUT
+    end
+    assert File.exist?(filename), "file should exist"
+    assert_equal File.read(filename).chomp, "warning: margin of the first line differs from minimum margin"
+  end
+  
 end
