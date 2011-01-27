@@ -1,8 +1,14 @@
+=== 1.0.4 / 2011-01-27
+
+* 1 minor enhancement
+
+  * Added _features_ section to README with compatibility and coverage info
+
 === 1.0.3 / 2011-01-27
 
 * 1 minor enhancement
 
-  * Slightly improved  the description section of README
+  * Slightly improved _description_ section of README
 
 === 1.0.2 / 2011-01-26
 
