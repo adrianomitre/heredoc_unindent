@@ -17,22 +17,25 @@ will probably be an issue and hence this gem.
 == SYNOPSIS:
 
   if true
-    s1 = <<-EOS
+    s = <<-EOS
       How sad it is
         to be unable
       to unindent heredocs
     EOS
-    s2 = <<-EOS.unindent
+    t = <<-EOS.unindent
       How wonderful it is
         to be able
       to do it!
     EOS
   end
 
-  s1[0, 13]  #=>  "      How sad"
-  s2[0, 13]  #=>  "How wonderful"
+  s[0..12]  #=>  "      How sad"
+  t[0..12]  #=>  "How wonderful"
 
-  " foo\n  bar\n baz".unindent  #=>  "foo\n bar\nbaz"
+  s = "   foo"  #=>  "   foo"
+  s.unindent!   #=>  "foo"
+  s.unindent!   #=>  nil
+  s             #=>  "foo"
 
 == FEATURES:
 
