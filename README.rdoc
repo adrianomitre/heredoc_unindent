@@ -4,15 +4,15 @@
 
 == DESCRIPTION:
 
-Removes common margin from indented strings such as the ones produced by
-heredocs, i.e., strips out leading whitespace chars at the beggining of
-each line (but only as much as the line with the smallest margin).
+This gem removes common margin from indented strings, such as the ones
+produced by indented heredocs. In other words, it strips out leading whitespace
+chars at the beggining of each line, but only as much as the line with the
+smallest margin.
 
-It is acknowledged that many strings defined by heredocs contain nothing but
-code to be read exclusively by parsers (e.g., Kernel#eval), which are often
-insensitive to extra indentation. Nevertheless, in the cases the string is
-printed or displayed, the unintended indentation is rarely innocuous -- and
-thus the reason for this gem.
+It is acknowledged that many strings defined by heredocs are just code and fact
+is that most parsers are insensitive to indentation. If, however, the strings
+are to be used otherwise, be it for printing or testing, the extra indentation
+will probably be an issue and hence this gem.
 
 == SYNOPSIS:
 
