@@ -1,3 +1,11 @@
+=== 1.0.6 / 2011-01-27
+
+* 1 minor enhancement
+
+  * Return of #unindent (out-of-place) should never be the original object
+    * bug fixed
+    * added test to ensure it will not return
+
 === 1.0.5 / 2011-01-27
 
 * 1 minor enhancement
