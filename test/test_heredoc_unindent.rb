@@ -81,6 +81,8 @@ EOS
     assert_equal pretty, ugly.unindent!(false)
     assert_equal pretty, ugly
     assert_equal nil, ugly.unindent!(false)
+    aux = pretty.unindent(false)
+    assert_not_same aux, aux.unindent(false), 'out-of-place method should never return the same object, but a copy'
   end
   
   def test_warning
