@@ -37,7 +37,22 @@ EOS
   def prep_sing3
     ugly = <<-EOS
       The first line
-  
+
+      The third line    
+    EOS
+    
+    pretty  = <<EOS
+      The first line
+
+      The third line    
+EOS
+    return ugly, pretty
+  end
+
+  def prep_sing4
+    ugly = <<-EOS
+      The first line
+      
       The third line    
     EOS
     
@@ -64,8 +79,10 @@ EOS
   end
   
   def test_unindent
-    perform_tests(*prep_sing1)
-    perform_tests(*prep_sing2)
+    1.upto(4) do |n|
+      m = method "prep_sing#{n}"
+      perform_tests(*m.call)
+    end
     perform_tests(*prep_mult)
   end
 
@@ -74,11 +91,11 @@ EOS
     assert_equal pretty, ugly.unindent(false)
     assert_equal pretty, ugly.heredoc_unindent(false)
     assert_equal ugly_bak, ugly, '#unindent should have no side-effects'
-    assert_equal pretty, ugly.heredoc_unindent!(false)
+    assert_equal pretty, ugly.heredoc_unindent!(false) unless pretty == ugly
     assert_equal pretty, ugly
     assert_equal nil, ugly.heredoc_unindent!(false)
     ugly = ugly_bak.dup
-    assert_equal pretty, ugly.unindent!(false)
+    assert_equal pretty, ugly.unindent!(false) unless pretty == ugly
     assert_equal pretty, ugly
     assert_equal nil, ugly.unindent!(false)
     aux = pretty.unindent(false)
