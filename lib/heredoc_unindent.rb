@@ -53,7 +53,7 @@ module CoreExt
         in_place ? gsub!(re, '') : gsub(re, '')
       end
 
-      if RUBY_VERSION >= '1.9' || defined?(RUBY_DESCRIPTION) && (RUBY_DESCRIPTION =~ /jruby/i || RUBY_DESCRIPTION =~ /rubinius/i)
+      if RUBY_VERSION >= '1.9' || defined?(RUBY_DESCRIPTION) && RUBY_DESCRIPTION =~ /jruby|rubinius/i
         alias unindent_base unindent_base_new
       else
         alias unindent_base unindent_base_old
