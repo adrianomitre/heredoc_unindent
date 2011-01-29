@@ -1,3 +1,12 @@
+=== 1.1.1 / 2011-01-29
+
+* 1 bugfix
+
+  * Replaced <tt>\s</tt>, which is equivalent to <tt>[ \t\r\n\f]</tt>,
+    by <tt>[ \t]</tt> in regular expression
+    * empty lines could lead to wrong behaviour
+  * Added tests to prevent the just-fixed bug to ever come back
+
 === 1.1.0 / 2011-01-29
 
 * 3 minor enhancements

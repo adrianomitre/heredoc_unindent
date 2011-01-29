@@ -6,7 +6,7 @@ require 'hoe'
 Hoe.spec 'heredoc_unindent' do
   developer('Adriano Mitre', 'adriano.mitre@gmail.com')
   
-  self.version = '1.1.0'
+  self.version = '1.1.1'
   
   self.readme_file = 'README.rdoc'
   self.history_file = 'History.rdoc'
