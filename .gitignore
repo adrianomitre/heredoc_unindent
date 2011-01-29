@@ -5,4 +5,4 @@ website/doc/*
 website/index.html
 .yardoc/
 *.rbc
-
+etc/*.txt
