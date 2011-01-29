@@ -21,7 +21,7 @@ end
 if $0 == __FILE__
 require File.expand_path('../../lib/heredoc_unindent', __FILE__)
   opts = Trollop::options do
-  banner <<-EOS.unindent #gsub(/^\s{4}/, '')
+  banner <<-EOS.gsub(/^[ \t]{4}/, '')
     Unindenting implementations:
 
       1. heredoc_unindent/unindent
