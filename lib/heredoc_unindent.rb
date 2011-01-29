@@ -22,7 +22,7 @@ module CoreExt
           puts "warning: margin of the first line differs from minimum margin"
         end
         return in_place ? nil : self.dup unless margins_min != 0
-        re = Regexp.new('^\s{0,' + margins_min.to_s + '}'  ) # omitting the lower limit produces warnings and wrong behavior in ruby-1.8.7-p330 and ree-1.8.7-2010.02
+        re = Regexp.new('^\s{' + margins_min.to_s + '}'  )
         in_place ? gsub!(re, '') : gsub(re, '')
       end
       
