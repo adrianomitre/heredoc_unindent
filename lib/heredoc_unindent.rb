@@ -26,7 +26,7 @@ module CoreExt
       def unindent_base_new(in_place, warn_first_not_min)
         m_first = nil
         m_min = nil
-        self.scan(/^\s*/) do |m|
+        self.scan(/^[ \t]*/) do |m|
           ms = m.size
           m_first ||= ms
           m_min = ms if !m_min || ms < m_min
@@ -43,7 +43,7 @@ module CoreExt
       # about 10% faster in ree, 20% in ruby-1.8.7 (old vs new)
       #
       def unindent_base_old(in_place, warn_first_not_min)
-        margins = self.scan(/^\s*/).map(&:size)
+        margins = self.scan(/^[ \t]*/).map(&:size)
         margins_min = margins.min
         if margins.first != margins_min && warn_first_not_min
           puts "warning: margin of the first line differs from minimum margin"
