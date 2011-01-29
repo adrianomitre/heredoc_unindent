@@ -70,14 +70,28 @@ Based on the answer by Rene Saarsoo to the question
 
 == ALTERNATIVES
 
-Despite minor API differences, extra-features availability or edge-case behaviour, the
-following gems implement the same unindenting functionality and are essentially equivalent to heredoc_unindent:
-* {outdent}[http://rubygems.org/gems/outdent] (formerly {unindentable}[http://rubygems.org/gems/unindentable])
-* {unindent}[http://rubygems.org/gems/unindent]
+Despite minor API differences or edge-case behaviour, the following gems
+implement equivalent unindenting functionality:
 
-And the following gem, which has a much broader scope, also features a method
-with equivalent functionality:
-* {indentation}[http://rubygems.org/gems/indentation] -- String#reset_indentation method
+1. {outdent}[http://rubygems.org/gems/outdent] (formerly {unindentable}[http://rubygems.org/gems/unindentable])
+2. {unindent}[http://rubygems.org/gems/unindent]
+3. {indentation}[http://rubygems.org/gems/indentation] -- this gem has a broader scope, besides String#reset_indentation
+
+=== So why another one?
+
+Well, the Fact is that the author only found about the other gems after he had
+already implemented heredoc_unindent. And, frankly, that was fortunate:
+benchmarking revealed that heredoc_unindent is by far the most efficient, both
+in space (memory) and time (cycles).
+
+=== Efficiency!
+
+Depending on the Ruby implementation, heredoc_unindent is is about *1.6--2.4x*
+*faster* than {unindent}[http://rubygems.org/gems/unindent], *1.9--6.6x*
+*faster* than {indentation}[http://rubygems.org/gems/indentation],
+and *4--19x* *faster* than {outdent}[http://rubygems.org/gems/outdent].
+In addition, heredoc_unindent has the *lowest* *memory* *consumption*,
+requiring only between a fifth and a sixth of the competitors.
 
 == LICENSE:
 
