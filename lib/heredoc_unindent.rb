@@ -8,14 +8,41 @@ module CoreExt
      
       private
       
-      # Actual implementation of the unindentation mechanism,
+      # Actual implementations of the unindentation mechanism,
       # both for in and out-of-place processing.
+      #
+      # @note The only reason there are two implementations is because the new
+      #       one is slower than the old one on MRI and REE 1.8.7. The fastest
+      #       implementation is automatically chosen based on the virtual
+      #       machine being executed.
       #
       # @param [Boolean] warn_first_not_min 
       # @param [Boolean] in_place
       # @return [String, nil]
       #
-      def unindent_base(in_place, warn_first_not_min)
+      
+      # about 50% faster in jruby, 56% in ruby-1.9.2, 62% in rbx-1.2.0 (new vs old)
+      #
+      def unindent_base_new(in_place, warn_first_not_min)
+        m_first = nil
+        m_min = nil
+        self.scan(/^\s*/) do |m|
+          ms = m.size
+          m_first ||= ms
+          m_min = ms if !m_min || ms < m_min
+          # break if ms == 0 ## only worth if the probability of marginless line above certain threshold
+        end
+        if m_first != m_min && warn_first_not_min
+          puts "warning: margin of the first line differs from minimum margin"
+        end
+        return in_place ? nil : self.dup unless m_min > 0
+        re = Regexp.new('^\s{' + m_min.to_s + '}'  )
+        in_place ? gsub!(re, '') : gsub(re, '')
+      end
+      
+      # about 10% faster in ree, 20% in ruby-1.8.7 (old vs new)
+      #
+      def unindent_base_old(in_place, warn_first_not_min)
         margins = self.scan(/^\s*/).map(&:size)
         margins_min = margins.min
         if margins.first != margins_min && warn_first_not_min
@@ -24,6 +51,12 @@ module CoreExt
         return in_place ? nil : self.dup unless margins_min != 0
         re = Regexp.new('^\s{' + margins_min.to_s + '}'  )
         in_place ? gsub!(re, '') : gsub(re, '')
+      end
+
+      if RUBY_VERSION >= '1.9' || defined?(RUBY_DESCRIPTION) && (RUBY_DESCRIPTION =~ /jruby/i || RUBY_DESCRIPTION =~ /rubinius/i)
+        alias unindent_base unindent_base_new
+      else
+        alias unindent_base unindent_base_old
       end
       
       public
