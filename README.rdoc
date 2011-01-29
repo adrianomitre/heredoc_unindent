@@ -75,7 +75,7 @@ implement equivalent unindenting functionality:
 
 1. {outdent}[http://rubygems.org/gems/outdent] (formerly {unindentable}[http://rubygems.org/gems/unindentable])
 2. {unindent}[http://rubygems.org/gems/unindent]
-3. {indentation}[http://rubygems.org/gems/indentation] -- this gem has a broader scope, besides String#reset_indentation
+3. {indentation}[http://rubygems.org/gems/indentation] -- this gem has a broader scope, in addition to String#reset_indentation
 
 === So why another one?
 
