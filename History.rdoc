@@ -1,3 +1,15 @@
+=== 1.1.0 / 2011-01-29
+
+* 3 minor enhancements
+
+  * Added a new #unindent_base implementation
+    * 50--62% faster on ruby-1.9.2-p136, jruby-1.5.6 and rbx-1.2.0
+    * 10--20% slower in ruby-1.8.7-p330 and ree-1.8.7-2010.02
+    * so the old one is kept and the fastest for your VM is automatically chosen on load-time
+  * Created a couple scripts to benchmark unindenting implementations
+    * available on the GitHub repository, but not included in the gem
+  * Improved ALTERNATIVES section of README with performance results extracted from benchmarking
+
 === 1.0.6 / 2011-01-27
 
 * 1 minor enhancement
