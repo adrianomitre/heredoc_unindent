@@ -1,10 +1,13 @@
 == SUGGESTIONS
 
-* Benchmark heredoc_unindent against alternatives:
-  * outdent
-  * unindent
-  * the code posted by Rene Saarsoo in his answer in StackOverflow.
-  and then
-  * if there are significant performance differences, contact the other authors
-    and suggest unifying gems, keeping the fastest implementation
-  * mention the results in README (table?)
+* added a mechanism for "ignoring" blank lines, i.e.,
+  * not include the margin of blank lines in the minimum calculation
+  * let them untouched (i.e., unprocessed)
+  * possible implementation:
+      re = Regexp.new '^\s{' + n.to_s + '}(\S+)$'
+      s.gsub(re,'\1')
+    instead of
+      re = Regexp.new '^\s{' + n.to_s + '}'
+      s.gsub(re, '')
+  * re-benchmark to make sure it does not hurt performance and performance
+    figures in README are still valid
