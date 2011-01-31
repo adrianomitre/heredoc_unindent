@@ -80,9 +80,9 @@ implement equivalent unindenting functionality:
 === So why another one?
 
 Well, the fact is that the author only found about the other gems after he had
-already implemented heredoc_unindent. And, frankly, that was fortunate:
-benchmarking revealed that heredoc_unindent is by far the most efficient, both
-in space (memory) and time (cycles).
+already implemented the initial version of heredoc_unindent. And it was for the
+good, as benchmarking revealed that heredoc_unindent is by far the most
+efficient of them, both memory and processor-wise.
 
 === Efficiency!
 
