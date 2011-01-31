@@ -65,7 +65,7 @@ and generate the RDoc.
 
 == ACKNOWLEDGEMENTS
 
-Based on the answer by Rene Saarsoo to the question
+The initial implementation was based on the answer by Rene Saarsoo to the question
 {how do i remove leading whitespace chars from ruby heredoc}[http://stackoverflow.com/questions/3772864/how-do-i-remove-leading-whitespace-chars-from-ruby-heredoc].
 
 == ALTERNATIVES
@@ -79,7 +79,7 @@ implement equivalent unindenting functionality:
 
 === So why another one?
 
-Well, the Fact is that the author only found about the other gems after he had
+Well, the fact is that the author only found about the other gems after he had
 already implemented heredoc_unindent. And, frankly, that was fortunate:
 benchmarking revealed that heredoc_unindent is by far the most efficient, both
 in space (memory) and time (cycles).
