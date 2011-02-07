@@ -112,6 +112,7 @@ EOS
     end
     assert File.exist?(filename), "file should exist"
     assert_equal File.read(filename).chomp, "warning: margin of the first line differs from minimum margin"
+    assert_nothing_raised { File.delete(filename) }
   end
   
 end
