@@ -1,3 +1,13 @@
+=== 1.1.2 / 2011-02-07
+
+* 1 minor bugfixes
+
+  * Temporary file is now being deleted after tests
+
+* 1 minor enhancements
+
+  * Minor improvements in README
+
 === 1.1.1 / 2011-01-29
 
 * 1 bugfix
