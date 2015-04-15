@@ -10,7 +10,7 @@ Hoe.spec 'heredoc_unindent' do
   
   self.readme_file = 'README.rdoc'
   self.history_file = 'History.rdoc'
-  self.extra_rdoc_files += ['README.rdoc', 'History.rdoc', 'Wishlist.rdoc']
+  self.extra_rdoc_files += ['README.rdoc', 'History.rdoc']
 
   # self.rubyforge_name = 'heredoc_unindentx' # if different than 'heredoc_unindent'
 end
