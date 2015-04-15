@@ -64,6 +64,39 @@ EOS
     return ugly, pretty
   end
 
+  # Test new flags.
+  #
+  def test_ignore_empty_and_ignore_blank
+    ugly = <<-EOS
+      foo
+
+        bar
+
+  
+      baz
+EOS
+    pretty_e1b0 = <<EOS
+    foo
+
+      bar
+
+
+    baz
+EOS
+    pretty_e0b1 = ugly.clone
+    pretty_e1b1 = <<EOS
+foo
+
+  bar
+
+
+baz
+EOS
+    assert_equal pretty_e1b0, ugly.unindent(false, ignore_empty: true, ignore_blank: false)
+    assert_equal pretty_e0b1, ugly.unindent(false, ignore_empty: false, ignore_blank: false)
+    assert_equal pretty_e1b1, ugly.unindent(false, ignore_empty: true, ignore_blank: true)
+  end
+
   def prep_mult
     ugly = <<-BEGIN + "      <--- middle --->\n" + <<-END
       This is the beginning:
@@ -77,7 +110,7 @@ This is the beginning:
 EOS
     return ugly, pretty
   end
-  
+
   def test_unindent
     1.upto(4) do |n|
       m = method "prep_sing#{n}"

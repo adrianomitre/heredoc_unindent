@@ -8,6 +8,11 @@ module CoreExt
      
       private
       
+      # Good for compatibility with older Ruby versions, bad for YARD/RDoc.
+      DefaultUnindentBaseNewArgs = {
+        :ignore_empty => false,
+        :ignore_blank => false
+      }
       # Actual implementations of the unindentation mechanism,
       # both for in and out-of-place processing.
       #
@@ -18,25 +23,39 @@ module CoreExt
       #
       # @param [Boolean] warn_first_not_min 
       # @param [Boolean] in_place
+      # @param [Hash] args Optional flags: ignore_empty and ignore_blank (the
+      #                                    latter imply the former).
       # @return [String, nil]
       #
-      
       # about 50% faster in jruby, 56% in ruby-1.9.2, 62% in rbx-1.2.0 (new vs old)
       #
-      def unindent_base_new(in_place, warn_first_not_min)
+      def unindent_base_new(in_place, warn_first_not_min, args)
+        args = DefaultUnindentBaseNewArgs.merge(args)
         m_first = nil
         m_min = nil
-        self.scan(/^[ \t]*/) do |m|
-          ms = m.size
-          m_first ||= ms
-          m_min = ms if !m_min || ms < m_min
-          # break if ms == 0 ## only worth if the probability of marginless line above certain threshold
+        if args[:ignore_empty] || args[:ignore_blank]
+          rl = self.lines # relevant lines
+          if args[:ignore_blank]
+            rl.reject! {|l| l[/^[ \t]*$/] }
+          elsif
+            rl.reject! {|l| l.chomp.empty? }
+          end
+          margins = rl.map {|l| l.gsub(/(\s*)\S?.*\n/,'\1').size }
+          m_first = margins.first
+          m_min = margins.min
+        else
+          self.scan(/^[ \t]*/) do |m|
+            ms = m.size
+            m_first ||= ms
+            m_min = ms if !m_min || ms < m_min
+            # break if ms == 0 ## only worth if the probability of marginless line above certain threshold
+          end
         end
         if m_first != m_min && warn_first_not_min
           puts "warning: margin of the first line differs from minimum margin"
         end
         return in_place ? nil : self.dup unless m_min > 0
-        re = Regexp.new('^\s{' + m_min.to_s + '}'  )
+        re = Regexp.new('^[ \t]{,' + m_min.to_s + '}'  )
         in_place ? gsub!(re, '') : gsub(re, '')
       end
       
@@ -53,10 +72,12 @@ module CoreExt
         in_place ? gsub!(re, '') : gsub(re, '')
       end
 
-      if RUBY_VERSION >= '1.9' || defined?(RUBY_DESCRIPTION) && RUBY_DESCRIPTION =~ /jruby|rubinius/i
-        alias unindent_base unindent_base_new
-      else
-        alias unindent_base unindent_base_old
+      def unindent_base(in_place, warn_first_not_min, args)
+        if !args.empty? || RUBY_VERSION >= '1.9' || defined?(RUBY_DESCRIPTION) && RUBY_DESCRIPTION =~ /jruby|rubinius/i
+          unindent_base_new(in_place, warn_first_not_min, args)
+        else
+          unindent_base_old(in_place, warn_first_not_min)
+        end
       end
       
       public
@@ -87,8 +108,9 @@ module CoreExt
       # @param  [Boolean] warn_first_not_min toggle warning if the margin of the first line differs from minimum margin
       # @return [::String] unindented string
       #
-      def heredoc_unindent(warn_first_not_min=true)
-        unindent_base(false, warn_first_not_min)
+      def heredoc_unindent(warn_first_not_min=true, args={})
+        args, warn_first_not_min = warn_first_not_min, true if warn_first_not_min.is_a? Hash
+        unindent_base(false, warn_first_not_min, args)
       end
       alias unindent heredoc_unindent
 
@@ -115,8 +137,8 @@ module CoreExt
       # @param  [Boolean] warn_first_dif_min toggle warning if the margin of the first line differs from minimum margin
       # @return [::String, NilClass] unindented self, or nil if no changes were made
       #
-      def  heredoc_unindent!(warn_first_not_min=true)
-        unindent_base(true, warn_first_not_min)
+      def  heredoc_unindent!(warn_first_not_min=true, args={})
+        unindent_base(true, warn_first_not_min, args)
       end
       alias unindent! heredoc_unindent!
     end

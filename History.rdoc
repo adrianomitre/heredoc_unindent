@@ -1,3 +1,10 @@
+=== 1.2.0 / 2015-04-15
+
+* 1 major enhancements
+
+  * new boolean flags ignore_{empty,blank} to tailor minimum margin calculation
+    * new functionality is disabled by default for backwards compatibility
+
 === 1.1.2 / 2011-02-07
 
 * 1 minor bugfixes
