@@ -16,7 +16,7 @@ will probably be an issue and hence this gem.
 
 === UPDATE
 
-Since version 2.3, Ruby has squiggly heredoc (`<<~`), so if your project does not need to support previous Ruby versions, there is no need to install a gem to solve the unindentation problem.
+Since version 2.3, Ruby has squiggly heredoc (<tt><<~</tt>), so if your project does not need to support previous Ruby versions, there is no need to install a gem to solve the unindentation problem.
 
 References:
 * {Ruby v2.3.0 ChangeLog - Feature #9098}[https://github.com/ruby/ruby/blob/v2_3_0/ChangeLog#L1177]
