@@ -14,6 +14,14 @@ is that most parsers are insensitive to indentation. If, however, the strings
 are to be used otherwise, be it for printing or testing, the extra indentation
 will probably be an issue and hence this gem.
 
+=== UPDATE
+
+Since version 2.3, Ruby has squiggly heredoc (`<<~`), so if your project does not need to support previous Ruby versions, there is no need to install a gem to solve the unindentation problem.
+
+References:
+* {Ruby v2.3.0 ChangeLog - Feature #9098}[https://github.com/ruby/ruby/blob/v2_3_0/ChangeLog#L1177]
+* {Multiline strings in Ruby 2.3 - the squiggly heredoc | Infinum}[https://infinum.co/the-capsized-eight/multiline-strings-ruby-2-3-0-the-squiggly-heredoc]
+
 == SYNOPSIS:
 
   if true
